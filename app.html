@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt MKT Pro — Seus Prompts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">P</span>
+                <span>Prompt MKT Pro</span>
+            </a>
+            <div class="nav-links">
+                <span id="userGreeting" class="nav-user" style="font-size:13px;color:var(--text-muted)"></span>
+                <button id="btnPremiumNav" class="btn-nav" onclick="showUpgradeModal()">Upgrade Premium</button>
+                <button id="btnLogout" class="btn-nav" style="background:transparent;border:1px solid var(--border-light)" onclick="logout()">Sair</button>
+            </div>
+            <button class="mobile-menu" id="mobileMenu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- SIGNUP MODAL -->
+    <div class="modal-overlay" id="signupModal">
+        <div class="modal">
+            <h2>Acesse seus prompts</h2>
+            <p>Cadastre-se gratis e acesse 50 prompts de marketing agora.</p>
+            <input type="text" class="modal-input" id="signupName" placeholder="Seu nome">
+            <input type="email" class="modal-input" id="signupEmail" placeholder="Seu melhor email">
+            <button class="btn-primary" onclick="signup()">Acessar gratis</button>
+            <p class="modal-note">Sem cartao. Sem spam. Acesso imediato.</p>
+        </div>
+    </div>
+
+    <!-- UPGRADE MODAL -->
+    <div class="modal-overlay hidden" id="upgradeModal">
+        <div class="modal">
+            <h2>Desbloquear Premium</h2>
+            <p>200+ prompts + 5 agentes de IA por R$ 27 (pagamento unico).</p>
+            <a href="#" id="paymentLink" class="btn-primary" style="display:block;text-align:center;margin-bottom:16px" target="_blank">Pagar R$ 27 via Pix/Cartao</a>
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Ja pagou? Insira seu codigo:</p>
+            <div class="premium-input-group">
+                <input type="text" class="modal-input" id="premiumCode" placeholder="Codigo premium" style="margin-bottom:0">
+                <button class="btn-primary" onclick="activatePremium()">Ativar</button>
+            </div>
+            <p class="modal-note" style="margin-top:16px"><a href="#" onclick="closeUpgradeModal()" style="color:var(--accent-light)">Voltar</a></p>
+        </div>
+    </div>
+
+    <!-- APP LAYOUT -->
+    <div class="app-layout">
+        <!-- SIDEBAR -->
+        <aside class="app-sidebar" id="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Categorias</div>
+                <button class="sidebar-item active" data-category="all">
+                    <span class="sidebar-item-icon">⚡</span>
+                    Todos
+                    <span class="sidebar-item-count" id="countAll">0</span>
+                </button>
+                <div id="sidebarCategories"></div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Agentes IA</div>
+                <button class="sidebar-item" data-category="agents">
+                    <span class="sidebar-item-icon">🤖</span>
+                    Agentes Premium
+                    <span class="sidebar-item-count">5</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="app-main">
+            <div class="app-header">
+                <input type="text" class="app-search" id="searchInput" placeholder="Buscar prompts...">
+                <div class="filter-btns">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="free">Gratis</button>
+                    <button class="filter-btn" data-filter="premium">Premium</button>
+                </div>
+            </div>
+
+            <div class="app-stats" id="appStats"></div>
+
+            <div class="prompts-grid" id="promptsGrid"></div>
+
+            <!-- AGENTS SECTION -->
+            <div class="agents-section hidden" id="agentsSection">
+                <h2>Agentes de Marketing IA</h2>
+                <p style="color:var(--text-muted);margin-bottom:24px;font-size:14px">Mega-prompts que transformam a IA num especialista completo. Copie, cole no ChatGPT ou Claude, e receba uma consultoria inteira.</p>
+                <div id="agentsGrid"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- FLOATING UPGRADE -->
+    <button class="floating-upgrade" id="floatingUpgrade" onclick="showUpgradeModal()">
+        ⚡ Desbloquear tudo — R$ 27
+    </button>
+
+    <script src="app.js"></script>
+</body>
+</html>

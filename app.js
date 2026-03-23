@@ -1,6 +1,6 @@
 // ===== CONFIG =====
 const PAYMENT_URL = 'https://pay.kiwify.com.br/PH2ClZt';
-const PREMIUM_CODE = 'PROMPTMKT2026'; // Codigo que desbloqueia premium
+const PREMIUM_CODE = 'PROMPTMKT2026'; // Código que desbloqueia premium
 
 // ===== STATE =====
 let allPrompts = [];
@@ -16,231 +16,231 @@ const agents = [
     {
         id: 'content-strategist',
         icon: '📅',
-        name: 'Estrategista de Conteudo',
-        description: 'Cria um calendario editorial completo de 30 dias personalizado pro seu nicho.',
-        prompt: `Voce e um estrategista de conteudo digital com 10 anos de experiencia em marketing para Instagram. Sua missao e criar um calendario editorial COMPLETO de 30 dias para o seguinte negocio:
+        name: 'Estrategista de Conteúdo',
+        description: 'Cria um calendário editorial completo de 30 dias personalizado pro seu nicho.',
+        prompt: `Você é um estrategista de conteúdo digital com 10 anos de experiência em marketing para Instagram. Sua missão é criar um calendário editorial COMPLETO de 30 dias para o seguinte negócio:
 
-INFORMACOES DO NEGOCIO:
+INFORMAÇÕES DO NEGÓCIO:
 - Nicho: [descreva seu nicho]
-- Publico-alvo: [descreva seu publico ideal - idade, dores, desejos]
+- Público-alvo: [descreva seu público ideal - idade, dores, desejos]
 - Objetivo principal: [ex: gerar leads, vender produto, construir autoridade]
-- Tom de voz: [ex: profissional mas acessivel, divertido, tecnico]
-- Frequencia desejada: [ex: 5 posts/semana]
+- Tom de voz: [ex: profissional mas acessível, divertido, técnico]
+- Frequência desejada: [ex: 5 posts/semana]
 
-INSTRUCOES:
-1. Primeiro, defina 4-5 pilares de conteudo estrategicos para o negocio
-2. Crie um calendario de 30 dias com:
+INSTRUÇÕES:
+1. Primeiro, defina 4-5 pilares de conteúdo estratégicos para o negócio
+2. Crie um calendário de 30 dias com:
    - Data e dia da semana
-   - Pilar de conteudo
+   - Pilar de conteúdo
    - Formato (Reel, Carrossel, Post, Story)
-   - Titulo/Tema do conteudo
-   - Gancho (frase de abertura que prende atencao)
-   - Resumo do conteudo (3-4 linhas)
+   - Título/Tema do conteúdo
+   - Gancho (frase de abertura que prende atenção)
+   - Resumo do conteúdo (3-4 linhas)
    - CTA sugerido
-   - Melhor horario de postagem
+   - Melhor horário de postagem
    - Hashtags sugeridas (5-8)
-3. Inclua mix de formatos: 60% Reels, 25% Carrosseis, 15% Posts
-4. Intercale conteudo educativo, pessoal, viral e de venda (70/20/10)
-5. No final, sugira 5 ideias de Stories diarios que complementam os posts
+3. Inclua mix de formatos: 60% Reels, 25% Carrosséis, 15% Posts
+4. Intercale conteúdo educativo, pessoal, viral e de venda (70/20/10)
+5. No final, sugira 5 ideias de Stories diários que complementam os posts
 
-Formate como tabela organizada por semana. Seja especifico e pratico — eu quero copiar e executar.`
+Formate como tabela organizada por semana. Seja específico e prático — eu quero copiar e executar.`
     },
     {
         id: 'sales-copywriter',
         icon: '🖊️',
         name: 'Copywriter de Vendas',
-        description: 'Escreve paginas de vendas, emails e anuncios que convertem.',
-        prompt: `Voce e um copywriter de vendas diretas com expertise em frameworks como AIDA, PAS, 4Ps e a formula de Gary Halbert. Seu trabalho e criar copy que CONVERTE.
+        description: 'Escreve páginas de vendas, emails e anúncios que convertem.',
+        prompt: `Você é um copywriter de vendas diretas com expertise em frameworks como AIDA, PAS, 4Ps e a fórmula de Gary Halbert. Seu trabalho é criar copy que CONVERTE.
 
 BRIEFING:
-- Produto/Servico: [descreva o que voce vende]
-- Preco: [R$ X]
-- Publico-alvo: [quem compra isso — idade, profissao, dores, desejos]
-- Principal beneficio: [o maior resultado que o cliente obtem]
-- Objecoes comuns: [ex: "e caro", "nao tenho tempo", "sera que funciona?"]
+- Produto/Serviço: [descreva o que você vende]
+- Preço: [R$ X]
+- Público-alvo: [quem compra isso — idade, profissão, dores, desejos]
+- Principal benefício: [o maior resultado que o cliente obtém]
+- Objeções comuns: [ex: "é caro", "não tenho tempo", "será que funciona?"]
 - Tom de voz: [ex: direto e confiante, empático, urgente]
-- Diferencial: [o que te separa da concorrencia]
+- Diferencial: [o que te separa da concorrência]
 
 ENTREGAS (crie TUDO):
 
-1. PAGINA DE VENDAS COMPLETA:
-   - Headline principal (3 opcoes)
+1. PÁGINA DE VENDAS COMPLETA:
+   - Headline principal (3 opções)
    - Sub-headline
-   - Secao de dor (problema que o cliente enfrenta)
-   - Secao de agitacao (consequencias de nao resolver)
-   - Apresentacao da solucao
-   - Beneficios (minimo 7, focados em resultado)
+   - Seção de dor (problema que o cliente enfrenta)
+   - Seção de agitação (consequências de não resolver)
+   - Apresentação da solução
+   - Benefícios (mínimo 7, focados em resultado)
    - Prova social (estrutura para depoimentos)
    - Oferta detalhada (o que vem incluso)
-   - Bonus (sugira 2-3)
+   - Bônus (sugira 2-3)
    - Garantia
    - CTA principal
    - FAQ (6 perguntas)
 
-2. SEQUENCIA DE 5 EMAILS:
-   - Email 1: Historia + Dor
-   - Email 2: Educacao + Autoridade
+2. SEQUÊNCIA DE 5 EMAILS:
+   - Email 1: História + Dor
+   - Email 2: Educação + Autoridade
    - Email 3: Prova social + Case
-   - Email 4: Oferta + Bonus
-   - Email 5: Urgencia + Ultimo CTA
+   - Email 4: Oferta + Bônus
+   - Email 5: Urgência + Último CTA
 
-3. 3 ANUNCIOS (Facebook/Instagram):
-   - Versao curta (2-3 linhas)
-   - Versao media (5-7 linhas)
-   - Versao longa (storytelling)
+3. 3 ANÚNCIOS (Facebook/Instagram):
+   - Versão curta (2-3 linhas)
+   - Versão média (5-7 linhas)
+   - Versão longa (storytelling)
 
-Escreva em portugues brasileiro. Use frases curtas. Foque em RESULTADOS, nao em caracteristicas. Cada palavra deve ter um proposito.`
+Escreva em português brasileiro. Use frases curtas. Foque em RESULTADOS, não em características. Cada palavra deve ter um propósito.`
     },
     {
         id: 'competitor-analyst',
         icon: '🔍',
-        name: 'Analista de Concorrencia',
+        name: 'Analista de Concorrência',
         description: 'Analisa concorrentes e encontra oportunidades de mercado.',
-        prompt: `Voce e um analista de mercado e estrategista de negocios. Sua especialidade e analise competitiva e identificacao de oportunidades.
+        prompt: `Você é um analista de mercado e estrategista de negócios. Sua especialidade é análise competitiva e identificação de oportunidades.
 
 CONTEXTO:
-- Meu negocio: [descreva o que voce faz]
-- Meu nicho: [nicho de atuacao]
+- Meu negócio: [descreva o que você faz]
+- Meu nicho: [nicho de atuação]
 - Meus concorrentes diretos: [liste 3-5 concorrentes com @ do Instagram ou site]
-- Meu diferencial atual: [o que voce acredita ser seu diferencial]
-- Meu preco medio: [R$ X]
+- Meu diferencial atual: [o que você acredita ser seu diferencial]
+- Meu preço médio: [R$ X]
 
-ANALISE SOLICITADA:
+ANÁLISE SOLICITADA:
 
 1. MAPA COMPETITIVO:
-   - Para cada concorrente, analise: posicionamento, publico-alvo, faixa de preco, pontos fortes, pontos fracos, estrategia de conteudo, frequencia de postagem
+   - Para cada concorrente, analise: posicionamento, público-alvo, faixa de preço, pontos fortes, pontos fracos, estratégia de conteúdo, frequência de postagem
    - Crie uma tabela comparativa
 
 2. GAPS DE MERCADO:
-   - Identifique 5 oportunidades que NENHUM concorrente esta explorando bem
-   - Para cada gap: o que e, por que e uma oportunidade, como eu posso preencher
+   - Identifique 5 oportunidades que NENHUM concorrente está explorando bem
+   - Para cada gap: o que é, por que é uma oportunidade, como eu posso preencher
 
-3. ANALISE DE CONTEUDO:
-   - Que tipo de conteudo performa melhor no nicho?
+3. ANÁLISE DE CONTEÚDO:
+   - Que tipo de conteúdo performa melhor no nicho?
    - Quais ganchos/temas geram mais engajamento?
-   - O que esta saturado (evitar)?
-   - O que esta em alta (aproveitar)?
+   - O que está saturado (evitar)?
+   - O que está em alta (aproveitar)?
 
-4. ESTRATEGIA DE DIFERENCIACAO:
-   - 3 formas de me posicionar de maneira unica
-   - Sugestao de proposta de valor unica (USP)
+4. ESTRATÉGIA DE DIFERENCIAÇÃO:
+   - 3 formas de me posicionar de maneira única
+   - Sugestão de proposta de valor única (USP)
    - Mensagem central que me separa dos demais
 
-5. PLANO DE ACAO:
-   - 5 acoes concretas que posso executar nas proximas 2 semanas
-   - Prioridade e impacto esperado de cada acao
+5. PLANO DE AÇÃO:
+   - 5 ações concretas que posso executar nas próximas 2 semanas
+   - Prioridade e impacto esperado de cada ação
 
-Seja analitico e pratico. Nao quero teoria generica — quero insights acionaveis baseados no meu mercado especifico.`
+Seja analítico e prático. Não quero teoria genérica — quero insights acionáveis baseados no meu mercado específico.`
     },
     {
         id: 'traffic-manager',
         icon: '📈',
-        name: 'Gestor de Trafego',
+        name: 'Gestor de Tráfego',
         description: 'Monta campanhas de Facebook e Google Ads otimizadas.',
-        prompt: `Voce e um gestor de trafego pago com especialidade em Facebook Ads e Google Ads. Sua missao e criar uma campanha completa e otimizada.
+        prompt: `Você é um gestor de tráfego pago com especialidade em Facebook Ads e Google Ads. Sua missão é criar uma campanha completa e otimizada.
 
 BRIEFING DA CAMPANHA:
-- Produto/Servico: [o que voce vende]
-- Preco: [R$ X]
-- Objetivo: [vendas diretas / geracao de leads / reconhecimento]
-- Orcamento mensal: [R$ X]
-- Publico-alvo: [idade, genero, localizacao, interesses, comportamento]
-- Pagina de destino: [URL ou descricao]
-- Ja rodou anuncios antes? [sim/nao — se sim, o que funcionou e o que nao]
+- Produto/Serviço: [o que você vende]
+- Preço: [R$ X]
+- Objetivo: [vendas diretas / geração de leads / reconhecimento]
+- Orçamento mensal: [R$ X]
+- Público-alvo: [idade, gênero, localização, interesses, comportamento]
+- Página de destino: [URL ou descrição]
+- Já rodou anúncios antes? [sim/não — se sim, o que funcionou e o que não]
 
 ENTREGAS:
 
 1. ESTRUTURA DE CAMPANHA (Facebook/Instagram Ads):
-   - Campanha 1: Topo de funil (consciencia)
+   - Campanha 1: Topo de funil (consciência)
      - Objetivo de campanha
-     - 3 conjuntos de anuncios com publicos diferentes
-     - Para cada conjunto: segmentacao detalhada, idade, genero, interesses, lookalike
-   - Campanha 2: Meio de funil (consideracao)
-     - Publicos de remarketing
-     - Segmentacao
-   - Campanha 3: Fundo de funil (conversao)
-     - Publicos quentes
-     - Segmentacao
+     - 3 conjuntos de anúncios com públicos diferentes
+     - Para cada conjunto: segmentação detalhada, idade, gênero, interesses, lookalike
+   - Campanha 2: Meio de funil (consideração)
+     - Públicos de remarketing
+     - Segmentação
+   - Campanha 3: Fundo de funil (conversão)
+     - Públicos quentes
+     - Segmentação
 
 2. CRIATIVOS (para cada campanha):
-   - 3 variações de copy (curta, media, longa)
-   - Sugestao de formato visual (imagem, video, carrossel)
-   - Headline e descricao
+   - 3 variações de copy (curta, média, longa)
+   - Sugestão de formato visual (imagem, vídeo, carrossel)
+   - Headline e descrição
    - CTA
 
-3. ORCAMENTO E DISTRIBUICAO:
-   - Como dividir o orcamento entre as 3 campanhas
+3. ORÇAMENTO E DISTRIBUIÇÃO:
+   - Como dividir o orçamento entre as 3 campanhas
    - Quanto investir por dia em cada conjunto
-   - Periodo de teste recomendado
+   - Período de teste recomendado
 
-4. METRICAS E OTIMIZACAO:
+4. MÉTRICAS E OTIMIZAÇÃO:
    - KPIs para monitorar (CTR, CPC, CPL, CPA, ROAS)
    - Metas para cada KPI
-   - Regras de otimizacao: quando pausar, quando escalar, quando mudar criativo
-   - Checklist semanal de otimizacao
+   - Regras de otimização: quando pausar, quando escalar, quando mudar criativo
+   - Checklist semanal de otimização
 
-5. GOOGLE ADS (se aplicavel):
+5. GOOGLE ADS (se aplicável):
    - 10 palavras-chave sugeridas
-   - 3 anuncios de pesquisa
-   - Estrategia de lance
+   - 3 anúncios de pesquisa
+   - Estratégia de lance
 
-Formate de forma clara e organizada. Eu quero poder ir direto pro Gerenciador de Anuncios e configurar.`
+Formate de forma clara e organizada. Eu quero poder ir direto pro Gerenciador de Anúncios e configurar.`
     },
     {
         id: 'social-media-manager',
         icon: '🎬',
         name: 'Social Media Manager',
-        description: 'Gera roteiros de Reels, legendas e estrategia completa de social media.',
-        prompt: `Voce e um social media manager especializado em Instagram, com foco em crescimento organico e engajamento. Voce domina algoritmo, formatos e tendencias atuais.
+        description: 'Gera roteiros de Reels, legendas e estratégia completa de social media.',
+        prompt: `Você é um social media manager especializado em Instagram, com foco em crescimento orgânico e engajamento. Você domina algoritmo, formatos e tendências atuais.
 
 MEU PERFIL:
 - @ do Instagram: [seu @]
 - Nicho: [seu nicho]
-- Seguidores atuais: [numero]
-- Meta de seguidores: [numero em X meses]
-- Tom de voz: [ex: profissional e acessivel]
-- Frequencia atual de postagem: [ex: 2x por semana]
-- O que ja funciona: [tipos de post que dao certo]
-- O que nao funciona: [tipos que nao performam]
+- Seguidores atuais: [número]
+- Meta de seguidores: [número em X meses]
+- Tom de voz: [ex: profissional e acessível]
+- Frequência atual de postagem: [ex: 2x por semana]
+- O que já funciona: [tipos de post que dão certo]
+- O que não funciona: [tipos que não performam]
 
 ENTREGAS COMPLETAS:
 
-1. DIAGNOSTICO DO PERFIL:
-   - Analise do posicionamento atual
+1. DIAGNÓSTICO DO PERFIL:
+   - Análise do posicionamento atual
    - Pontos fortes e fracos
    - Oportunidades de crescimento
-   - Sugestao de bio otimizada (3 opcoes)
-   - Sugestao de highlights
+   - Sugestão de bio otimizada (3 opções)
+   - Sugestão de highlights
 
 2. 10 ROTEIROS DE REELS:
    Para cada Reel:
-   - Titulo
+   - Título
    - Formato (talking head, b-roll, tutorial, storytelling)
-   - Duracao ideal
+   - Duração ideal
    - Gancho (primeiros 3 segundos — a parte mais importante)
-   - Roteiro completo com marcacao de tempo
+   - Roteiro completo com marcação de tempo
    - Texto na tela sugerido
    - CTA
-   - Audio sugerido (trending ou original)
+   - Áudio sugerido (trending ou original)
    - Hashtags (5-8)
 
 3. 5 IDEIAS DE CARROSSEL:
-   - Titulo da capa
-   - Conteudo de cada slide (7-10 slides)
-   - CTA do ultimo slide
+   - Título da capa
+   - Conteúdo de cada slide (7-10 slides)
+   - CTA do último slide
 
-4. ESTRATEGIA DE STORIES (7 dias):
-   - Rotina diaria de Stories
+4. ESTRATÉGIA DE STORIES (7 dias):
+   - Rotina diária de Stories
    - Formatos interativos (enquete, quiz, caixa, slider)
-   - Quando e como mencionar produto/servico
+   - Quando e como mencionar produto/serviço
 
-5. ESTRATEGIA DE ENGAJAMENTO:
-   - Como responder comentarios pra gerar mais conversas
+5. ESTRATÉGIA DE ENGAJAMENTO:
+   - Como responder comentários pra gerar mais conversas
    - 10 perfis pra interagir estrategicamente
    - Script de DM para novos seguidores
    - Como usar collabs e lives
 
-Seja especifico e pratico. Roteiros prontos pra gravar. Nada generico.`
+Seja específico e prático. Roteiros prontos pra gravar. Nada genérico.`
     }
 ];
 
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('.app-layout').style.pointerEvents = 'none';
     } else {
         document.getElementById('signupModal').classList.add('hidden');
-        document.getElementById('userGreeting').textContent = `Ola, ${user.name}`;
+        document.getElementById('userGreeting').textContent = `Olá, ${user.name}`;
     }
 
     // Check premium from URL
@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         renderStats();
     } catch (e) {
         console.error('Erro ao carregar prompts:', e);
-        document.getElementById('promptsGrid').innerHTML = '<p style="color:var(--text-muted);grid-column:1/-1;text-align:center;padding:60px 0">Carregando prompts... Se persistir, verifique se o arquivo prompts-database.json esta na mesma pasta.</p>';
+        document.getElementById('promptsGrid').innerHTML = '<p style="color:var(--text-muted);grid-column:1/-1;text-align:center;padding:60px 0">Carregando prompts... Se persistir, verifique se o arquivo prompts-database.json está na mesma pasta.</p>';
     }
 
     // Render agents
@@ -317,7 +317,7 @@ function signup() {
     const name = document.getElementById('signupName').value.trim();
     const email = document.getElementById('signupEmail').value.trim();
     if (!name || !email) return alert('Preencha nome e email.');
-    if (!email.includes('@')) return alert('Email invalido.');
+    if (!email.includes('@')) return alert('Email inválido.');
 
     user = { name, email, createdAt: new Date().toISOString() };
     localStorage.setItem('promptmkt_user', JSON.stringify(user));
@@ -325,7 +325,7 @@ function signup() {
     document.getElementById('signupModal').classList.add('hidden');
     document.querySelector('.app-layout').style.filter = '';
     document.querySelector('.app-layout').style.pointerEvents = '';
-    document.getElementById('userGreeting').textContent = `Ola, ${user.name}`;
+    document.getElementById('userGreeting').textContent = `Olá, ${user.name}`;
 
     // Save lead (in production, send to API/webhook)
     console.log('Novo lead:', user);
@@ -354,9 +354,9 @@ function activatePremium() {
         updatePremiumUI();
         renderPrompts();
         renderAgents();
-        alert('Premium ativado! Todos os prompts e agentes estao desbloqueados.');
+        alert('Premium ativado! Todos os prompts e agentes estão desbloqueados.');
     } else {
-        alert('Codigo invalido. Verifique e tente novamente.');
+        alert('Código inválido. Verifique e tente novamente.');
     }
 }
 
@@ -411,7 +411,7 @@ function renderStats() {
     const premium = total - free;
     document.getElementById('appStats').innerHTML = `
         <span class="app-stat"><strong>${total}</strong> prompts total</span>
-        <span class="app-stat"><strong>${free}</strong> gratis</span>
+        <span class="app-stat"><strong>${free}</strong> grátis</span>
         <span class="app-stat"><strong>${premium}</strong> premium</span>
     `;
 }
@@ -452,7 +452,7 @@ function renderPrompts() {
         return `<div class="prompt-card ${isLocked ? 'locked' : ''}">
             <div class="prompt-card-header">
                 <span class="prompt-card-cat">${p.categoryIcon} ${p.categoryName}</span>
-                <span class="prompt-card-tier ${p.tier}">${p.tier === 'free' ? 'Gratis' : 'Premium'}</span>
+                <span class="prompt-card-tier ${p.tier}">${p.tier === 'free' ? 'Grátis' : 'Premium'}</span>
             </div>
             <h3 class="prompt-card-title">${p.title_pt}</h3>
             <p class="prompt-card-text ${isLocked ? 'blurred' : ''}">${isLocked ? truncated : p.prompt_pt}</p>

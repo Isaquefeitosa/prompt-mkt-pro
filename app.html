@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prompt MKT Pro — Seus Prompts</title>
+    <title>AXION — Seus Prompts</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,8 +15,7 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <span class="logo-icon">P</span>
-                <span>Prompt MKT Pro</span>
+                <img src="logo.svg" alt="AXION" style="height:28px">
             </a>
             <div class="nav-links">
                 <span id="userGreeting" class="nav-user" style="font-size:13px;color:var(--text-muted)"></span>
@@ -32,11 +32,11 @@
     <div class="modal-overlay" id="signupModal">
         <div class="modal">
             <h2>Acesse seus prompts</h2>
-            <p>Cadastre-se gratis e acesse 50 prompts de marketing agora.</p>
+            <p>Cadastre-se grátis e acesse 50 prompts de marketing agora.</p>
             <input type="text" class="modal-input" id="signupName" placeholder="Seu nome">
             <input type="email" class="modal-input" id="signupEmail" placeholder="Seu melhor email">
-            <button class="btn-primary" onclick="signup()">Acessar gratis</button>
-            <p class="modal-note">Sem cartao. Sem spam. Acesso imediato.</p>
+            <button class="btn-primary" onclick="signup()">Acessar grátis</button>
+            <p class="modal-note">Sem cartão. Sem spam. Acesso imediato.</p>
         </div>
     </div>
 
@@ -44,11 +44,11 @@
     <div class="modal-overlay hidden" id="upgradeModal">
         <div class="modal">
             <h2>Desbloquear Premium</h2>
-            <p>200+ prompts + 5 agentes de IA por R$ 97 (pagamento unico).</p>
-            <a href="#" id="paymentLink" class="btn-primary" style="display:block;text-align:center;margin-bottom:16px" target="_blank">Pagar R$ 97 via Pix/Cartao</a>
-            <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Ja pagou? Insira seu codigo:</p>
+            <p>200+ prompts + 5 agentes de IA por R$ 97 (pagamento único).</p>
+            <a href="#" id="paymentLink" class="btn-primary" style="display:block;text-align:center;margin-bottom:16px" target="_blank">Pagar R$ 97 via Pix/Cartão</a>
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Já pagou? Insira seu código:</p>
             <div class="premium-input-group">
-                <input type="text" class="modal-input" id="premiumCode" placeholder="Codigo premium" style="margin-bottom:0">
+                <input type="text" class="modal-input" id="premiumCode" placeholder="Código premium" style="margin-bottom:0">
                 <button class="btn-primary" onclick="activatePremium()">Ativar</button>
             </div>
             <p class="modal-note" style="margin-top:16px"><a href="#" onclick="closeUpgradeModal()" style="color:var(--accent-light)">Voltar</a></p>
@@ -84,7 +84,7 @@
                 <input type="text" class="app-search" id="searchInput" placeholder="Buscar prompts...">
                 <div class="filter-btns">
                     <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="free">Gratis</button>
+                    <button class="filter-btn" data-filter="free">Grátis</button>
                     <button class="filter-btn" data-filter="premium">Premium</button>
                 </div>
             </div>

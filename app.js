@@ -1,6 +1,8 @@
 // ===== CONFIG =====
 const PAYMENT_URL = 'https://pay.kiwify.com.br/PH2ClZt';
 const PREMIUM_CODE = 'PROMPTMKT2026'; // Código que desbloqueia premium
+// URL do Webhook do Google Apps Script (ATUALIZADA)
+const LEADS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzNpYMUY3-a0mR8obD-HXib-WH-_d7PUIuVWvfsnqdDEtoxoxVWx50mbAy8kyBpV5ax/exec';
 
 // ===== STATE =====
 let allPrompts = [];
@@ -145,7 +147,7 @@ BRIEFING DA CAMPANHA:
 - Objetivo: [vendas diretas / geração de leads / reconhecimento]
 - Orçamento mensal: [R$ X]
 - Público-alvo: [idade, gênero, localização, interesses, comportamento]
-- Página de destino: [URL ou descrição]
+- Página de destino: https://www.merriam-webster.com/dictionary/ou
 - Já rodou anúncios antes? [sim/não — se sim, o que funcionou e o que não]
 
 ENTREGAS:
@@ -319,7 +321,12 @@ function signup() {
     if (!name || !email) return alert('Preencha nome e email.');
     if (!email.includes('@')) return alert('Email inválido.');
 
-    user = { name, email, createdAt: new Date().toISOString() };
+    user = {
+        name,
+        email,
+        createdAt: new Date().toISOString()
+    };
+
     localStorage.setItem('promptmkt_user', JSON.stringify(user));
 
     document.getElementById('signupModal').classList.add('hidden');
@@ -327,7 +334,21 @@ function signup() {
     document.querySelector('.app-layout').style.pointerEvents = '';
     document.getElementById('userGreeting').textContent = `Olá, ${user.name}`;
 
-    // Save lead (in production, send to API/webhook)
+    // Envia lead para Google Sheets via Apps Script (Ajuste Profissional - Passo 7)
+    fetch(LEADS_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify({
+            name: user.name,
+            email: user.email,
+            createdAt: user.createdAt,
+            source: 'PromptMkt App', // Identificador da origem
+            product: 'PromptMkt'     // Identificador do produto
+        })
+    }).catch((error) => {
+        console.error('Erro ao enviar lead para Google Sheets:', error);
+    });
+
     console.log('Novo lead:', user);
 }
 

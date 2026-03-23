@@ -1,5 +1,5 @@
 // ===== CONFIG =====
-const PAYMENT_URL = '#'; // Trocar pelo link da Kiwify/Hotmart
+const PAYMENT_URL = 'https://kiwify.app/EEobYVH';
 const PREMIUM_CODE = 'PROMPTMKT2026'; // Codigo que desbloqueia premium
 
 // ===== STATE =====

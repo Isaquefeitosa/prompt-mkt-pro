@@ -463,7 +463,7 @@ function renderPrompts() {
                 <div class="lock-overlay">
                     <span class="lock-icon">🔒</span>
                     <span class="lock-text">Prompt Premium</span>
-                    <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear — R$ 27</button>
+                    <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear — R$ 97</button>
                 </div>
             ` : `
                 <div class="prompt-card-actions">
@@ -502,7 +502,7 @@ function renderAgents() {
             </div>
             <p>${agent.description}</p>
             ${isLocked ? `
-                <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear Premium — R$ 27</button>
+                <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear Premium — R$ 97</button>
             ` : `
                 <button class="btn-agent" onclick="copyAgent('${agent.id}', this)">Copiar prompt do agente</button>
             `}

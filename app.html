@@ -1,11 +1,3 @@
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "w0dmxbccy6");
-</script>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -38,13 +30,19 @@
 
     <!-- SIGNUP MODAL -->
     <div class="modal-overlay" id="signupModal">
-        <div class="modal">
-            <h2>Acesse seus prompts</h2>
-            <p>Cadastre-se grátis e acesse 50 prompts de marketing agora.</p>
+        <div class="modal modal-signup-win">
+            <div class="signup-win-badge">🎉 ACESSO LIBERADO</div>
+            <h2>Você ganhou <span style="color:var(--accent-light)">50 prompts</span> de marketing</h2>
+            <p style="color:var(--text-muted);font-size:14px;margin-bottom:8px">Prompts prontos pra copiar e usar agora no ChatGPT ou Claude.</p>
+            <div class="signup-win-perks">
+                <div class="signup-perk">✓ 50 prompts desbloqueados</div>
+                <div class="signup-perk">✓ 11 categorias de marketing</div>
+                <div class="signup-perk">✓ Acesso imediato e vitalício</div>
+            </div>
             <input type="text" class="modal-input" id="signupName" placeholder="Seu nome">
             <input type="email" class="modal-input" id="signupEmail" placeholder="Seu melhor email">
-            <button class="btn-primary" onclick="signup()">Acessar grátis</button>
-            <p class="modal-note">Sem cartão. Sem spam. Acesso imediato.</p>
+            <button class="btn-primary btn-signup-win" onclick="signup()">Liberar meus 50 prompts grátis</button>
+            <p class="modal-note">Sem cartão. Sem spam. Acesso em 3 segundos.</p>
         </div>
     </div>
 

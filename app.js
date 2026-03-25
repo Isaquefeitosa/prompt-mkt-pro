@@ -12,7 +12,7 @@ let user = JSON.parse(localStorage.getItem('promptmkt_user')) || null;
 let isPremium = localStorage.getItem('promptmkt_premium') === 'true';
 
 // ===== AGENTS DATA =====
-const agents = [
+const marketingAgents = [
     {
         id: 'content-strategist',
         icon: '📅',
@@ -241,7 +241,10 @@ ENTREGAS COMPLETAS:
    - Como usar collabs e lives
 
 Seja específico e prático. Roteiros prontos pra gravar. Nada genérico.`
-    },
+    }
+];
+
+const imageAgents = [
     {
         id: 'axion-moda',
         icon: '👗',
@@ -1940,14 +1943,18 @@ function renderSidebar() {
             item.classList.add('active');
             currentCategory = item.dataset.category;
 
-            if (currentCategory === 'agents') {
+            const isAgents = currentCategory === 'agents-marketing' || currentCategory === 'agents-image';
+            if (isAgents) {
                 document.getElementById('promptsGrid').classList.add('hidden');
-                document.getElementById('agentsSection').classList.remove('hidden');
                 document.getElementById('appStats').classList.add('hidden');
                 document.querySelector('.app-header').classList.add('hidden');
+                // Show correct section, hide the other
+                document.getElementById('agentsMarketingSection').classList.toggle('hidden', currentCategory !== 'agents-marketing');
+                document.getElementById('agentsImageSection').classList.toggle('hidden', currentCategory !== 'agents-image');
             } else {
                 document.getElementById('promptsGrid').classList.remove('hidden');
-                document.getElementById('agentsSection').classList.add('hidden');
+                document.getElementById('agentsMarketingSection').classList.add('hidden');
+                document.getElementById('agentsImageSection').classList.add('hidden');
                 document.getElementById('appStats').classList.remove('hidden');
                 document.querySelector('.app-header').classList.remove('hidden');
                 renderPrompts();
@@ -2042,10 +2049,9 @@ function copyPrompt(btn, id) {
 }
 
 // ===== AGENTS =====
-function renderAgents() {
-    const grid = document.getElementById('agentsGrid');
-    grid.innerHTML = agents.map(agent => {
-        const isLocked = !isPremium;
+function renderAgentCards(agentList) {
+    const isLocked = !isPremium;
+    return agentList.map(agent => {
         return `<div class="app-agent-card">
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
                 <span style="font-size:28px">${agent.icon}</span>
@@ -2062,8 +2068,16 @@ function renderAgents() {
     }).join('');
 }
 
+function renderAgents() {
+    const mktGrid = document.getElementById('agentsGrid');
+    const imgGrid = document.getElementById('imageAgentsGrid');
+    if (mktGrid) mktGrid.innerHTML = renderAgentCards(marketingAgents);
+    if (imgGrid) imgGrid.innerHTML = renderAgentCards(imageAgents);
+}
+
 function copyAgent(id, btn) {
-    const agent = agents.find(a => a.id === id);
+    const allAgents = [...marketingAgents, ...imageAgents];
+    const agent = allAgents.find(a => a.id === id);
     if (!agent) return;
 
     navigator.clipboard.writeText(agent.prompt).then(() => {

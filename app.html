@@ -93,10 +93,15 @@
             </div>
             <div class="sidebar-section">
                 <div class="sidebar-title">Agentes IA</div>
-                <button class="sidebar-item" data-category="agents">
+                <button class="sidebar-item" data-category="agents-marketing">
                     <span class="sidebar-item-icon">🤖</span>
-                    Agentes Premium
-                    <span class="sidebar-item-count">25</span>
+                    Marketing
+                    <span class="sidebar-item-count">5</span>
+                </button>
+                <button class="sidebar-item" data-category="agents-image">
+                    <span class="sidebar-item-icon">🎨</span>
+                    Direção de Arte
+                    <span class="sidebar-item-count">20</span>
                 </button>
             </div>
         </aside>
@@ -116,11 +121,18 @@
 
             <div class="prompts-grid" id="promptsGrid"></div>
 
-            <!-- AGENTS SECTION -->
-            <div class="agents-section hidden" id="agentsSection">
-                <h2>Agentes de Marketing IA</h2>
-                <p style="color:var(--text-muted);margin-bottom:24px;font-size:14px">Mega-prompts que transformam a IA num especialista completo. Copie, cole no ChatGPT ou Claude, e receba uma consultoria inteira.</p>
+            <!-- MARKETING AGENTS SECTION -->
+            <div class="agents-section hidden" id="agentsMarketingSection">
+                <h2>🤖 Agentes de Marketing IA</h2>
+                <p style="color:var(--text-muted);margin-bottom:24px;font-size:14px">Mega-prompts que transformam a IA num especialista de marketing. Copie, cole no ChatGPT ou Claude, e receba uma consultoria inteira.</p>
                 <div id="agentsGrid"></div>
+            </div>
+
+            <!-- IMAGE AGENTS SECTION -->
+            <div class="agents-section hidden" id="agentsImageSection">
+                <h2>🎨 Agentes de Direção de Arte</h2>
+                <p style="color:var(--text-muted);margin-bottom:24px;font-size:14px">Agentes especializados por nicho para gerar imagens profissionais. Cole no ChatGPT ou Claude com seu briefing e referências visuais.</p>
+                <div id="imageAgentsGrid"></div>
             </div>
         </main>
     </div>

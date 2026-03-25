@@ -496,6 +496,26 @@ a {
     font-weight: 600;
 }
 
+/* ===== AGENT NICHE TAGS ===== */
+.agent-niche-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: all var(--transition);
+}
+
+.agent-niche-tag:hover {
+    border-color: var(--accent);
+    color: var(--text);
+}
+
 /* ===== EXPANDABLE CATEGORY CARDS ===== */
 .cat-card-expanded {
     background: var(--bg-card);

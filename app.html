@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXION — Seus Prompts</title>
+    <title>AXION — Plataforma de Prompts</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,8 +35,7 @@
                 <img src="logo.svg" alt="AXION" style="height:28px">
             </a>
             <div class="nav-links">
-                <span id="userGreeting" class="nav-user" style="font-size:13px;color:var(--text-muted)"></span>
-                <button id="btnPremiumNav" class="btn-nav btn-nav-premium" onclick="showUpgradeModal()">⚡ 12x R$ 10,03 — Desbloquear tudo</button>
+                <button id="btnPremiumNav" class="btn-nav btn-nav-premium" onclick="showUpgradeModal()">⚡ Se tornar Premium</button>
             </div>
             <button class="mobile-menu" id="mobileMenu">
                 <span></span><span></span><span></span>
@@ -66,11 +65,11 @@
                 <div class="upgrade-perk">✓ Atualizações vitalícias</div>
             </div>
 
-            <a href="#" id="paymentLink" class="btn-primary btn-upgrade-cta" target="_blank">Desbloquear tudo — 12x R$ 10,03</a>
+            <a href="#" id="paymentLink" class="btn-primary btn-upgrade-cta" target="_blank">Se tornar Premium — 12x R$ 10,03</a>
 
             <div class="upgrade-social-proof">
                 <div class="upgrade-social-dot"></div>
-                +325 pessoas já estão aplicando e faturando 5 dígitos
+                +325 pessoas já estão aplicando e faturando mais de R$ 8.000
             </div>
 
             <p style="font-size:12px;color:var(--text-dim);margin-top:16px;margin-bottom:8px">Já pagou? Insira seu código:</p>
@@ -86,12 +85,19 @@
         <!-- SIDEBAR -->
         <aside class="app-sidebar" id="sidebar">
             <div class="sidebar-section">
-                <div class="sidebar-title">Categorias</div>
-                <button class="sidebar-item active" data-category="all">
+                <div class="sidebar-title">Menu</div>
+                <button class="sidebar-item active" data-category="dashboard">
+                    <span class="sidebar-item-icon">📊</span>
+                    Dashboard
+                </button>
+                <button class="sidebar-item" data-category="all">
                     <span class="sidebar-item-icon">⚡</span>
-                    Todos
+                    Todos os Prompts
                     <span class="sidebar-item-count" id="countAll">0</span>
                 </button>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Categorias</div>
                 <div id="sidebarCategories"></div>
             </div>
             <div class="sidebar-section">
@@ -111,18 +117,91 @@
 
         <!-- MAIN CONTENT -->
         <main class="app-main">
-            <div class="app-header">
-                <input type="text" class="app-search" id="searchInput" placeholder="Buscar prompts...">
-                <div class="filter-btns">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="free">Grátis</button>
-                    <button class="filter-btn" data-filter="premium">Premium</button>
+
+            <!-- DASHBOARD VIEW (default) -->
+            <div id="dashboardView">
+                <!-- Hero social proof -->
+                <div class="dash-hero">
+                    <div class="dash-hero-badge">
+                        <span class="dash-hero-dot"></span>
+                        +325 pessoas já faturando mais de R$ 8.000 com esses prompts e agentes
+                    </div>
+                    <h1 class="dash-hero-title">Seu arsenal de <span class="gradient-text">marketing com IA</span></h1>
+                    <p class="dash-hero-sub">200+ prompts validados · 25 agentes especializados · 11 categorias</p>
+                </div>
+
+                <!-- Dashboard stats -->
+                <div class="dash-stats" id="dashStats">
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon">📋</div>
+                        <div class="dash-stat-num" id="statCopied">0</div>
+                        <div class="dash-stat-label">Prompts copiados</div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon">🤖</div>
+                        <div class="dash-stat-num" id="statAgents">0</div>
+                        <div class="dash-stat-label">Agentes usados</div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon">📁</div>
+                        <div class="dash-stat-num" id="statCategories">0</div>
+                        <div class="dash-stat-label">Categorias exploradas</div>
+                    </div>
+                    <div class="dash-stat-card dash-stat-premium">
+                        <div class="dash-stat-icon">⚡</div>
+                        <div class="dash-stat-num" id="statStatus">Grátis</div>
+                        <div class="dash-stat-label">Seu plano</div>
+                    </div>
+                </div>
+
+                <!-- Category boxes grid -->
+                <h2 class="dash-section-title">Categorias de Prompts</h2>
+                <div class="dash-categories" id="dashCategories"></div>
+
+                <!-- Agents preview -->
+                <h2 class="dash-section-title" style="margin-top:48px">Agentes de IA</h2>
+                <div class="dash-agents-row">
+                    <div class="dash-agent-box" onclick="navigateTo('agents-marketing')">
+                        <div class="dash-agent-icon">🤖</div>
+                        <div class="dash-agent-info">
+                            <h3>Agentes de Marketing</h3>
+                            <p>5 mega-prompts: estratégia, copy, tráfego, concorrência, social media</p>
+                        </div>
+                        <span class="dash-agent-arrow">→</span>
+                    </div>
+                    <div class="dash-agent-box" onclick="navigateTo('agents-image')">
+                        <div class="dash-agent-icon">🎨</div>
+                        <div class="dash-agent-info">
+                            <h3>Agentes de Direção de Arte</h3>
+                            <p>20 agentes por nicho: moda, food, fitness, tech, beauty, auto e mais</p>
+                        </div>
+                        <span class="dash-agent-arrow">→</span>
+                    </div>
+                </div>
+
+                <!-- Recent activity -->
+                <h2 class="dash-section-title" style="margin-top:48px">Atividade recente</h2>
+                <div class="dash-activity" id="dashActivity">
+                    <div class="dash-activity-empty">
+                        <span style="font-size:32px;display:block;margin-bottom:12px">📋</span>
+                        Comece copiando um prompt — sua atividade aparece aqui.
+                    </div>
                 </div>
             </div>
 
-            <div class="app-stats" id="appStats"></div>
-
-            <div class="prompts-grid" id="promptsGrid"></div>
+            <!-- PROMPTS VIEW -->
+            <div id="promptsView" class="hidden">
+                <div class="app-header">
+                    <input type="text" class="app-search" id="searchInput" placeholder="Buscar prompts...">
+                    <div class="filter-btns">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="free">Grátis</button>
+                        <button class="filter-btn" data-filter="premium">Premium</button>
+                    </div>
+                </div>
+                <div class="app-stats" id="appStats"></div>
+                <div class="prompts-grid" id="promptsGrid"></div>
+            </div>
 
             <!-- MARKETING AGENTS SECTION -->
             <div class="agents-section hidden" id="agentsMarketingSection">
@@ -142,7 +221,7 @@
 
     <!-- FLOATING UPGRADE -->
     <button class="floating-upgrade" id="floatingUpgrade" onclick="showUpgradeModal()">
-        ⚡ Desbloquear tudo — 12x R$ 10,03
+        ⚡ Se tornar Premium
     </button>
 
     <script src="app.js"></script>

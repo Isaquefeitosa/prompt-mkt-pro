@@ -5,11 +5,24 @@ const PREMIUM_CODE = 'PROMPTMKT2026'; // Código que desbloqueia premium
 // ===== STATE =====
 let allPrompts = [];
 let categories = [];
-let currentCategory = 'all';
+let currentCategory = 'dashboard';
 let currentFilter = 'all';
 let searchQuery = '';
-let user = JSON.parse(localStorage.getItem('promptmkt_user')) || null;
 let isPremium = localStorage.getItem('promptmkt_premium') === 'true';
+
+// ===== ACTIVITY TRACKER =====
+function getActivity() {
+    return JSON.parse(localStorage.getItem('axion_activity') || '[]');
+}
+function saveActivity(entry) {
+    const acts = getActivity();
+    acts.unshift({ ...entry, time: Date.now() });
+    if (acts.length > 50) acts.length = 50;
+    localStorage.setItem('axion_activity', JSON.stringify(acts));
+}
+function getCopiedCount() { return getActivity().filter(a => a.type === 'prompt').length; }
+function getAgentCount() { return new Set(getActivity().filter(a => a.type === 'agent').map(a => a.id)).size; }
+function getCategoryCount() { return new Set(getActivity().map(a => a.category).filter(Boolean)).size; }
 
 // ===== AGENTS DATA =====
 const marketingAgents = [
@@ -1798,18 +1811,11 @@ Confirme silenciosamente. AXION B2B ativo para Nano Banana Pro.`
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', async () => {
-    // No auth gate - free access for everyone
-    if (user) {
-        document.getElementById('userGreeting').textContent = `Olá, ${user.name}`;
-    }
-
     // Check premium from URL
     if (new URLSearchParams(window.location.search).get('premium') === 'true') {
         isPremium = true;
         localStorage.setItem('promptmkt_premium', 'true');
     }
-
-    // Update UI based on premium
     updatePremiumUI();
 
     // Load prompts
@@ -1824,22 +1830,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
         renderSidebar();
-        renderPrompts();
-        renderStats();
+        renderDashboard();
+        renderAgents();
     } catch (e) {
         console.error('Erro ao carregar prompts:', e);
-        document.getElementById('promptsGrid').innerHTML = '<p style="color:var(--text-muted);grid-column:1/-1;text-align:center;padding:60px 0">Carregando prompts... Se persistir, verifique se o arquivo prompts-database.json está na mesma pasta.</p>';
     }
 
-    // Render agents
-    renderAgents();
-
-    // Event listeners
+    // Search
     document.getElementById('searchInput').addEventListener('input', (e) => {
         searchQuery = e.target.value.toLowerCase();
         renderPrompts();
     });
 
+    // Filters
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1892,6 +1895,46 @@ function updatePremiumUI() {
     }
 }
 
+// ===== NAVIGATION =====
+function navigateTo(cat) {
+    currentCategory = cat;
+    document.querySelectorAll('.sidebar-item').forEach(i => {
+        i.classList.toggle('active', i.dataset.category === cat);
+    });
+    // Close mobile sidebar
+    document.getElementById('sidebar').classList.remove('mobile-open');
+    const mm = document.getElementById('mobileMenu');
+    if (mm) mm.classList.remove('active');
+
+    showView(cat);
+}
+
+function showView(cat) {
+    const dashboard = document.getElementById('dashboardView');
+    const prompts = document.getElementById('promptsView');
+    const mktAgents = document.getElementById('agentsMarketingSection');
+    const imgAgents = document.getElementById('agentsImageSection');
+
+    // Hide all
+    dashboard.classList.add('hidden');
+    prompts.classList.add('hidden');
+    mktAgents.classList.add('hidden');
+    imgAgents.classList.add('hidden');
+
+    if (cat === 'dashboard') {
+        dashboard.classList.remove('hidden');
+        renderDashboard();
+    } else if (cat === 'agents-marketing') {
+        mktAgents.classList.remove('hidden');
+    } else if (cat === 'agents-image') {
+        imgAgents.classList.remove('hidden');
+    } else {
+        prompts.classList.remove('hidden');
+        renderPrompts();
+        renderStats();
+    }
+}
+
 // ===== SIDEBAR =====
 function renderSidebar() {
     const container = document.getElementById('sidebarCategories');
@@ -1906,31 +1949,80 @@ function renderSidebar() {
 
     document.getElementById('countAll').textContent = allPrompts.length;
 
-    // Click events
+    // Click events for ALL sidebar items
     document.querySelectorAll('.sidebar-item').forEach(item => {
-        item.addEventListener('click', () => {
-            document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-            currentCategory = item.dataset.category;
-
-            const isAgents = currentCategory === 'agents-marketing' || currentCategory === 'agents-image';
-            if (isAgents) {
-                document.getElementById('promptsGrid').classList.add('hidden');
-                document.getElementById('appStats').classList.add('hidden');
-                document.querySelector('.app-header').classList.add('hidden');
-                // Show correct section, hide the other
-                document.getElementById('agentsMarketingSection').classList.toggle('hidden', currentCategory !== 'agents-marketing');
-                document.getElementById('agentsImageSection').classList.toggle('hidden', currentCategory !== 'agents-image');
-            } else {
-                document.getElementById('promptsGrid').classList.remove('hidden');
-                document.getElementById('agentsMarketingSection').classList.add('hidden');
-                document.getElementById('agentsImageSection').classList.add('hidden');
-                document.getElementById('appStats').classList.remove('hidden');
-                document.querySelector('.app-header').classList.remove('hidden');
-                renderPrompts();
-            }
-        });
+        item.addEventListener('click', () => navigateTo(item.dataset.category));
     });
+}
+
+// ===== DASHBOARD =====
+function renderDashboard() {
+    // Stats
+    document.getElementById('statCopied').textContent = getCopiedCount();
+    document.getElementById('statAgents').textContent = getAgentCount();
+    document.getElementById('statCategories').textContent = getCategoryCount();
+    document.getElementById('statStatus').textContent = isPremium ? 'Premium' : 'Grátis';
+    const statusCard = document.querySelector('.dash-stat-premium .dash-stat-num');
+    if (statusCard) statusCard.style.color = isPremium ? 'var(--green)' : 'var(--accent-light)';
+
+    // Category boxes
+    const catContainer = document.getElementById('dashCategories');
+    if (categories.length > 0) {
+        catContainer.innerHTML = categories.map(cat => {
+            const total = cat.prompts.length;
+            const free = cat.prompts.filter(p => p.tier === 'free').length;
+            const premium = total - free;
+            return `<div class="dash-cat-box" onclick="navigateTo('${cat.id}')">
+                <div class="dash-cat-header">
+                    <span class="dash-cat-icon">${cat.icon}</span>
+                    <span class="dash-cat-count">${total} prompts</span>
+                </div>
+                <h3 class="dash-cat-name">${cat.name_pt}</h3>
+                <div class="dash-cat-bar">
+                    <div class="dash-cat-bar-free" style="width:${(free/total*100).toFixed(0)}%"></div>
+                </div>
+                <div class="dash-cat-meta">
+                    <span class="dash-cat-free">${free} grátis</span>
+                    <span class="dash-cat-premium">${premium} premium</span>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // Activity log
+    renderActivity();
+}
+
+function renderActivity() {
+    const container = document.getElementById('dashActivity');
+    const acts = getActivity().slice(0, 10);
+    if (acts.length === 0) {
+        container.innerHTML = `<div class="dash-activity-empty">
+            <span style="font-size:32px;display:block;margin-bottom:12px">📋</span>
+            Comece copiando um prompt — sua atividade aparece aqui.
+        </div>`;
+        return;
+    }
+    container.innerHTML = acts.map(a => {
+        const icon = a.type === 'agent' ? '🤖' : '📋';
+        const ago = timeAgo(a.time);
+        return `<div class="dash-activity-item">
+            <span class="dash-activity-icon">${icon}</span>
+            <div class="dash-activity-text">
+                <strong>${a.name}</strong>
+                <span class="dash-activity-cat">${a.category || ''}</span>
+            </div>
+            <span class="dash-activity-time">${ago}</span>
+        </div>`;
+    }).join('');
+}
+
+function timeAgo(ts) {
+    const diff = Math.floor((Date.now() - ts) / 1000);
+    if (diff < 60) return 'agora';
+    if (diff < 3600) return Math.floor(diff/60) + 'min';
+    if (diff < 86400) return Math.floor(diff/3600) + 'h';
+    return Math.floor(diff/86400) + 'd';
 }
 
 // ===== STATS =====
@@ -1992,7 +2084,7 @@ function renderPrompts() {
                 <div class="lock-overlay">
                     <span class="lock-icon">🔒</span>
                     <span class="lock-text">Prompt Premium</span>
-                    <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear — 12x R$ 10,03</button>
+                    <button class="btn-unlock" onclick="showUpgradeModal()">Se tornar Premium</button>
                 </div>
             ` : `
                 <div class="prompt-card-actions">
@@ -2011,6 +2103,7 @@ function copyPrompt(btn, id) {
     navigator.clipboard.writeText(prompt.prompt_pt).then(() => {
         btn.textContent = 'Copiado!';
         btn.classList.add('copied');
+        saveActivity({ type: 'prompt', id: prompt.id, name: prompt.title_pt, category: prompt.categoryName });
         setTimeout(() => {
             btn.textContent = 'Copiar prompt';
             btn.classList.remove('copied');
@@ -2030,7 +2123,7 @@ function renderAgentCards(agentList) {
             </div>
             <p>${agent.description}</p>
             ${isLocked ? `
-                <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear tudo — 12x R$ 10,03</button>
+                <button class="btn-unlock" onclick="showUpgradeModal()">Se tornar Premium</button>
             ` : `
                 <button class="btn-agent" onclick="copyAgent('${agent.id}', this)">Copiar prompt do agente</button>
             `}
@@ -2053,6 +2146,7 @@ function copyAgent(id, btn) {
     navigator.clipboard.writeText(agent.prompt).then(() => {
         btn.textContent = 'Copiado!';
         btn.style.background = 'var(--green)';
+        saveActivity({ type: 'agent', id: agent.id, name: agent.name, category: 'Agente IA' });
         setTimeout(() => {
             btn.textContent = 'Copiar prompt do agente';
             btn.style.background = 'var(--accent)';

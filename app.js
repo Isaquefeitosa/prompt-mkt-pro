@@ -1798,13 +1798,8 @@ Confirme silenciosamente. AXION B2B ativo para Nano Banana Pro.`
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', async () => {
-    // Check auth
-    if (!user) {
-        document.getElementById('signupModal').classList.remove('hidden');
-        document.querySelector('.app-layout').style.filter = 'blur(8px)';
-        document.querySelector('.app-layout').style.pointerEvents = 'none';
-    } else {
-        document.getElementById('signupModal').classList.add('hidden');
+    // No auth gate - free access for everyone
+    if (user) {
         document.getElementById('userGreeting').textContent = `Olá, ${user.name}`;
     }
 
@@ -1864,32 +1859,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('paymentLink').href = PAYMENT_URL;
 });
 
-// ===== AUTH =====
-function signup() {
-    const name = document.getElementById('signupName').value.trim();
-    const email = document.getElementById('signupEmail').value.trim();
-    if (!name || !email) return alert('Preencha nome e email.');
-    if (!email.includes('@')) return alert('Email inválido.');
-
-    user = { name, email, createdAt: new Date().toISOString() };
-    localStorage.setItem('promptmkt_user', JSON.stringify(user));
-
-    document.getElementById('signupModal').classList.add('hidden');
-    document.querySelector('.app-layout').style.filter = '';
-    document.querySelector('.app-layout').style.pointerEvents = '';
-    document.getElementById('userGreeting').textContent = `Olá, ${user.name}`;
-
-    // Meta Pixel: Track Lead
-    if (typeof fbq === 'function') fbq('track', 'Lead');
-    console.log('Novo lead:', user);
-}
-
-function logout() {
-    localStorage.removeItem('promptmkt_user');
-    localStorage.removeItem('promptmkt_premium');
-    location.reload();
-}
-
+// ===== UPGRADE =====
 function showUpgradeModal() {
     document.getElementById('upgradeModal').classList.remove('hidden');
 }
@@ -2022,7 +1992,7 @@ function renderPrompts() {
                 <div class="lock-overlay">
                     <span class="lock-icon">🔒</span>
                     <span class="lock-text">Prompt Premium</span>
-                    <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear — R$ 97</button>
+                    <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear — 12x R$ 10,03</button>
                 </div>
             ` : `
                 <div class="prompt-card-actions">
@@ -2060,7 +2030,7 @@ function renderAgentCards(agentList) {
             </div>
             <p>${agent.description}</p>
             ${isLocked ? `
-                <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear Premium — R$ 97</button>
+                <button class="btn-unlock" onclick="showUpgradeModal()">Desbloquear tudo — 12x R$ 10,03</button>
             ` : `
                 <button class="btn-agent" onclick="copyAgent('${agent.id}', this)">Copiar prompt do agente</button>
             `}

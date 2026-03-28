@@ -36,8 +36,7 @@
             </a>
             <div class="nav-links">
                 <span id="userGreeting" class="nav-user" style="font-size:13px;color:var(--text-muted)"></span>
-                <button id="btnPremiumNav" class="btn-nav" onclick="showUpgradeModal()">Upgrade Premium</button>
-                <button id="btnLogout" class="btn-nav" style="background:transparent;border:1px solid var(--border-light)" onclick="logout()">Sair</button>
+                <button id="btnPremiumNav" class="btn-nav btn-nav-premium" onclick="showUpgradeModal()">⚡ 12x R$ 10,03 — Desbloquear tudo</button>
             </div>
             <button class="mobile-menu" id="mobileMenu">
                 <span></span><span></span><span></span>
@@ -45,36 +44,40 @@
         </div>
     </nav>
 
-    <!-- SIGNUP MODAL -->
-    <div class="modal-overlay" id="signupModal">
-        <div class="modal modal-signup-win">
-            <div class="signup-win-badge">🎉 ACESSO LIBERADO</div>
-            <h2>Você ganhou <span style="color:var(--accent-light)">50 prompts</span> de marketing</h2>
-            <p style="color:var(--text-muted);font-size:14px;margin-bottom:8px">Prompts prontos pra copiar e usar agora no ChatGPT ou Claude.</p>
-            <div class="signup-win-perks">
-                <div class="signup-perk">✓ 50 prompts desbloqueados</div>
-                <div class="signup-perk">✓ 11 categorias de marketing</div>
-                <div class="signup-perk">✓ Acesso imediato e vitalício</div>
-            </div>
-            <input type="text" class="modal-input" id="signupName" placeholder="Seu nome">
-            <input type="email" class="modal-input" id="signupEmail" placeholder="Seu melhor email">
-            <button class="btn-primary btn-signup-win" onclick="signup()">Liberar meus 50 prompts grátis</button>
-            <p class="modal-note">Sem cartão. Sem spam. Acesso em 3 segundos.</p>
-        </div>
-    </div>
-
     <!-- UPGRADE MODAL -->
     <div class="modal-overlay hidden" id="upgradeModal">
-        <div class="modal">
-            <h2>Desbloquear Premium</h2>
-            <p>200+ prompts + 25 agentes de IA por R$ 97 (pagamento único).</p>
-            <a href="#" id="paymentLink" class="btn-primary" style="display:block;text-align:center;margin-bottom:16px" target="_blank">Pagar R$ 97 via Pix/Cartão</a>
-            <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Já pagou? Insira seu código:</p>
+        <div class="modal modal-upgrade">
+            <button class="modal-close" onclick="closeUpgradeModal()">&times;</button>
+            <div class="upgrade-badge">🔥 OFERTA DE LANÇAMENTO</div>
+            <h2>Desbloqueie <span style="color:var(--accent-light)">todo o arsenal</span></h2>
+            <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px">200+ prompts + 25 agentes de IA. Acesso vitalício.</p>
+
+            <div class="upgrade-price-box">
+                <div class="upgrade-price-old">De <span style="text-decoration:line-through;color:#ef4444">R$ 5.014</span> por:</div>
+                <div class="upgrade-price-installment">12x <span class="upgrade-price-value">R$ 10,03</span></div>
+                <div class="upgrade-price-full">ou R$ 97 à vista</div>
+            </div>
+
+            <div class="upgrade-perks">
+                <div class="upgrade-perk">✓ 200+ prompts de marketing desbloqueados</div>
+                <div class="upgrade-perk">✓ 5 agentes de marketing IA</div>
+                <div class="upgrade-perk">✓ 20 agentes de direção de arte</div>
+                <div class="upgrade-perk">✓ 11 categorias completas</div>
+                <div class="upgrade-perk">✓ Atualizações vitalícias</div>
+            </div>
+
+            <a href="#" id="paymentLink" class="btn-primary btn-upgrade-cta" target="_blank">Desbloquear tudo — 12x R$ 10,03</a>
+
+            <div class="upgrade-social-proof">
+                <div class="upgrade-social-dot"></div>
+                +325 pessoas já estão aplicando e faturando 5 dígitos
+            </div>
+
+            <p style="font-size:12px;color:var(--text-dim);margin-top:16px;margin-bottom:8px">Já pagou? Insira seu código:</p>
             <div class="premium-input-group">
                 <input type="text" class="modal-input" id="premiumCode" placeholder="Código premium" style="margin-bottom:0">
                 <button class="btn-primary" onclick="activatePremium()">Ativar</button>
             </div>
-            <p class="modal-note" style="margin-top:16px"><a href="#" onclick="closeUpgradeModal()" style="color:var(--accent-light)">Voltar</a></p>
         </div>
     </div>
 
@@ -139,7 +142,7 @@
 
     <!-- FLOATING UPGRADE -->
     <button class="floating-upgrade" id="floatingUpgrade" onclick="showUpgradeModal()">
-        ⚡ Desbloquear tudo — R$ 97
+        ⚡ Desbloquear tudo — 12x R$ 10,03
     </button>
 
     <script src="app.js"></script>
